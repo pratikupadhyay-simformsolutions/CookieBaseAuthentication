@@ -1,7 +1,12 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddAuthorization(options =>
+{
+    // Policy for Admin role
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireRole("Admin"));
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
